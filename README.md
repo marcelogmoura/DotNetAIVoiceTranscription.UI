@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# DotNetAIVoiceTranscription UI - Interface de Transcrição de Voz
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
+![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![Visual Studio Code](https://img.shields.io/badge/VS_Code-007ACC?style=flat&logo=visual-studio-code&logoColor=white)
+![Git](https://img.shields.io/badge/GIT-F05032?style=flat&logo=git&logoColor=white)
 
-## Available Scripts
+## ✨ O Backend (API) do projeto se encontra no link:
 
-In the project directory, you can run:
+[https://github.com/marcelogmoura/DotNetAIVoiceTranscription](https://github.com/marcelogmoura/DotNetAIVoiceTranscription)
 
-### `npm start`
+Esta é a interface de usuário (UI) desenvolvida em **React** para interagir com a API de Transcrição de Voz (DotNetAIVoiceTranscription.API). A aplicação permite que o usuário selecione um arquivo de áudio e o envie para a API, exibindo o texto transcrito em tempo real.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Funcionalidade Principal
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+O componente principal (`AudioUploader.js`) gerencia o fluxo de trabalho completo:
 
-### `npm test`
+* **Seleção de Arquivo:** O usuário seleciona um arquivo de áudio (através do `accept="audio/*"`).
+* **Upload e Transcrição:** O evento `onClick` do botão "Upload and Transcribe" dispara a função `handleUpload`, que:
+    * Cria um objeto `FormData`.
+    * Anexa o arquivo de áudio sob a chave `"file"`.
+    * Envia a requisição `POST` para o endpoint `/transcribe` da API.
+* **Exibição do Resultado:** A resposta da API (o texto transcrito) é armazenada no estado (`transcription`) e exibida na tela.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠️ Tecnologias
 
-### `npm run build`
+* **React** (`^19.2.0`)
+* **Axios** (`^1.13.2`) para requisições HTTP.
+* **React Scripts** (`^5.0.1`)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ⚙️ Configuração do Projeto
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Pré-requisitos
+* Node.js e npm (ou yarn).
+* A API do backend (`DotNetAIVoiceTranscription.API`) deve estar rodando e acessível em `http://localhost:5075`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Configuração da API
+O serviço HTTP (`src/Services/api.js`) está configurado com a URL base da API do backend:
 
-### `npm run eject`
+```javascript
+// src/Services/api.js
+import axios from "axios";
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+const api = axios.create({
+    baseURL: 'http://localhost:5075/ai',
+});
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+export default api;
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Se o endereço da sua API for diferente, altere o valor da **baseURL** neste arquivo.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Como Rodar Localmente
 
-## Learn More
+1.  Certifique-se de que a API do backend está em execução.
+2.  Navegue até o diretório do projeto:
+    ```bash
+    cd DotNetAIVoiceTranscription.UI
+    ```
+3.  Instale as dependências:
+    ```bash
+    npm install
+    # ou yarn install
+    ```
+4.  Execute o projeto:
+    ```bash
+    npm start
+    # ou yarn start
+    ```
+5.  A aplicação será aberta em seu navegador, geralmente em `http://localhost:3000`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+👨‍💻 **Autor:** Marcelo Moura 
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+📧 **Email:** [mgmoura@gmail.com](mailto:mgmoura@gmail.com)   
+📧 **Email:** [admin@allriders.com.br](mailto:admin@allriders.com.br)   
+🐱 **GitHub:** [github.com/marcelogmoura](https://github.com/marcelogmoura)   
+🔗 **LinkedIn:** [linkedin.com/in/marcelogmoura](https://www.linkedin.com/in/marcelogmoura/)   
